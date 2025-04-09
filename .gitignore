@@ -21,3 +21,12 @@ build/
 
 *.apk
 *.ipa
+
+.dart_tool/
+
+.packages
+
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+pubspec.lock
+.vscode/
