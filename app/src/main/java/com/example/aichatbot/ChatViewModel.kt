@@ -14,8 +14,8 @@ class ChatViewModel : ViewModel() {
     private val _messages = MutableLiveData<List<ChatMessage>>(emptyList())
     val messages: LiveData<List<ChatMessage>> = _messages
 
-    private val openRouterKey = "Bearer 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" // Replace with your OpenRouter key
-    private val stabilityApiKey = "Bearer sk-AkTbNlqFJ74nVy4jeWMOWG3Du4AMstk7MyJSEa8YgChG94WF" // Replace with your Stability AI key
+    private val openRouterKey = "Bearer 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" 
+    private val stabilityApiKey = "Bearer sk-AkTbNlqFJ74nVy4jeWMOWG3Du4AMstk7MyJSEa8YgChG94WF" 
 
     fun sendMessage(userMessage: String) {
         _messages.postValue(_messages.value?.plus(ChatMessage(userMessage, true)))
@@ -39,7 +39,7 @@ class ChatViewModel : ViewModel() {
             .post(jsonBody.toString().toRequestBody("application/json".toMediaTypeOrNull()))
             .addHeader("Authorization", openRouterKey)
             .addHeader("Content-Type", "application/json")
-            .addHeader("HTTP-Referer", "https://AIChatbot.com") // required
+            .addHeader("HTTP-Referer", "https://AIChatbot.com") 
             .build()
 
         OkHttpClient().newCall(request).enqueue(object : Callback {
@@ -74,14 +74,14 @@ class ChatViewModel : ViewModel() {
 
         val body = JSONObject().apply {
             put("prompt", prompt)
-            put("model", "stable-diffusion-xl-1024-v1-0")  // New model ID
+            put("model", "stable-diffusion-xl-1024-v1-0")  
             put("output_format", "base64_json")
         }
 
         val request = Request.Builder()
             .url("https://api.stability.ai/v2beta/stable-image/generate/core")
             .post(body.toString().toRequestBody("application/json".toMediaTypeOrNull()))
-            .addHeader("Authorization", "Bearer YOUR_STABILITY_API_KEY")  // 🔑 Replace this!
+            .addHeader("Authorization", "Bearer $stabilityApiKey")  
             .addHeader("Accept", "application/json")
             .addHeader("Content-Type", "application/json")
             .build()
